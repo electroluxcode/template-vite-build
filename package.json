@@ -21,6 +21,7 @@
   "module": "./es/index.js",
   "types": "./es/index.d.ts",
   "dependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
     "ahooks": "^3.7.11",
     "antd": "^4.24.16",
     "axios": "^1.7.4",
@@ -51,7 +52,7 @@
     "less": "^4.2.0",
     "postcss": "^8.4.41",
     "typescript": "^5.2.2",
-    "vite": "npm:rolldown-vite@7.1.20", 
+    "vite": "npm:rolldown-vite@7.1.20",
     "vite-plugin-dts": "^3.9.0",
     "vite-plugin-imp": "^2.4.0"
   }
