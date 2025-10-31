@@ -30,6 +30,7 @@ export default defineConfig((config): UserConfig => {
     },
     plugins: [
       react({
+        jsxRuntime: 'classic',
       }),
       commonjs(),
 			cdn({
