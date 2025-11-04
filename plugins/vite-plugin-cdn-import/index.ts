@@ -1,7 +1,7 @@
 import externalGlobals, { type ModuleNameMap } from "rollup-plugin-external-globals"
 
 import type { HtmlTagDescriptor, Plugin, UserConfig } from "vite"
-import { Module, Options } from "./types"
+import { Module } from "./types"
 
 
 
@@ -86,6 +86,6 @@ function PluginImportToCDN(options: Options): Plugin[] {
 /**
  * @deprecated Pass the package name directly in options.modules instead.
  */
-export { PluginImportToCDN as Plugin, Options }
+export { PluginImportToCDN as Plugin }
 
 export default PluginImportToCDN

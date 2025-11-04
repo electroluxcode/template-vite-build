@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 // const isDev = false
 import cdn from "./plugins/vite-plugin-cdn-import/index.ts"
-import commonjs from '@rollup/plugin-commonjs';
+const externalModules = ["react", "react-dom"];
+import { customEsmExternalPlugin } from "./plugins/vite-plugin-rolldown-esm";
 // Web 应用打包配置 - 默认打包 app.tsx
 export default defineConfig((config): UserConfig => {
   process.env = {
@@ -30,16 +31,15 @@ export default defineConfig((config): UserConfig => {
     },
     plugins: [
       react({
-        jsxRuntime: 'classic',
+        // 使用自动 JSX transform
       }),
-      commonjs(),
 			cdn({
 					modules: [
             {
               name: 'react',
               var: 'React',
               path: 'https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js',
-              version: '17.0.2',
+              version: '18.3.1',
               pathList: [
                 'https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js'
               ],
@@ -49,14 +49,14 @@ export default defineConfig((config): UserConfig => {
               name: 'react-dom',
               var: 'ReactDOM',
               path: 'https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js',
-              version: '17.0.2',
+              version: '18.3.1',
               pathList: [
                 'https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js'
               ],
               cssList: []
             }
           ]
-				}),
+			}),
     ],
     css: {
       modules: {
@@ -86,15 +86,25 @@ export default defineConfig((config): UserConfig => {
         input: {
           app: path.resolve(__dirname, "index.html"),
         },
-        external: ["react", "react-dom",  "lodash-es", "@tabler/icons-react"],
+        external: externalModules,
         output: {
+          // 配置 external 模块到全局变量的映射，供 rollup-plugin-external-globals 使用
           globals: {
             'react': 'React',
-            'react-dom': 'ReactDOM',
-            'lodash-es': 'lodash-es',
-            '@tabler/icons-react': 'TablerIconsReact',
+            'react-dom': 'ReactDOM'
           }
-        }
+        },
+         plugins: [
+           // 使用 Rolldown 内置插件，将 external 模块的 require() 转换为 import
+           // https://rolldown.rs/builtin-plugins/esm-external-require
+           customEsmExternalPlugin({
+            external: externalModules,
+            globals: {
+              'react': 'React',
+              'react-dom': 'ReactDOM',
+            },
+          }),
+         ],
       },
     },
   };
