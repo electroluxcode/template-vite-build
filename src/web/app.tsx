@@ -48,19 +48,39 @@ export const App = () => {
                 textRuns: [],
                 paragraphs: [{ startIndex: 0 }],
                 sectionBreaks: [{ startIndex: 2 }],
+                "documentStyle": {
+                    "pageSize": {
+                        "width": 595,
+                        "height": 842
+                    },
+                    "marginTop": 72,
+                    "marginBottom": 72,
+                    "marginRight": 90,
+                    "marginLeft": 90
+                }
             },
         })
         const univerInstanceService = univer.__getInjector().get(IUniverInstanceService)
         setTimeout(() => {
             univerInstanceService.disposeUnit('doc1')
             univer.createUnit(UniverInstanceType.UNIVER_DOC, {
-                id: 'doc1',
-                body: {
-                    dataStream: 'test2\r\n',
-                    textRuns: [],
-                    paragraphs: [{ startIndex: 0 }],
-                    sectionBreaks: [{ startIndex: 2 }],
+                "id": "doc2",
+                "body": {
+                    "dataStream": "test2\r\n",
+                    "textRuns": [],
+                    "paragraphs": [{"startIndex": 0}],
+                    "sectionBreaks": [{"startIndex": 2}]
                 },
+                "documentStyle": {
+                    "pageSize": {
+                        "width": 595,
+                        "height": 842
+                    },
+                    "marginTop": 72,
+                    "marginBottom": 72,
+                    "marginRight": 90,
+                    "marginLeft": 90
+                }
             })
         }, 3000)
     }, [])
