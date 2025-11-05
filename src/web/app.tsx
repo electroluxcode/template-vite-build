@@ -54,7 +54,7 @@ export const App = () => {
         setTimeout(() => {
             univerInstanceService.disposeUnit('doc1')
             univer.createUnit(UniverInstanceType.UNIVER_DOC, {
-                id: 'doc2',
+                id: 'doc1',
                 body: {
                     dataStream: 'test2\r\n',
                     textRuns: [],
@@ -62,7 +62,7 @@ export const App = () => {
                     sectionBreaks: [{ startIndex: 2 }],
                 },
             })
-        }, 1000)
+        }, 3000)
     }, [])
     return (
         <div id="app">
