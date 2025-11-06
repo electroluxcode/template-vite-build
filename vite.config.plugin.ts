@@ -57,8 +57,10 @@ export default defineConfig((config): UserConfig => {
       //压缩
       minify: false,
       rollupOptions: {
-        input: "./src/plugin/index.ts",
+        input: "./src/plugin/index.tsx",
         external: [
+          "antd",
+          "antdv5",
         ],
         plugins: [nodeResolve()],
         output: [
@@ -68,6 +70,7 @@ export default defineConfig((config): UserConfig => {
             preserveModulesRoot: "src",
             inlineDynamicImports: true, 
             exports: "named",
+            entryFileNames: "plugin.js",
             //配置打包根目录
             dir: "./dist/es",
           },
@@ -83,7 +86,7 @@ export default defineConfig((config): UserConfig => {
         ],
       },
       lib: {
-        entry: ["./src/plugin/index.ts"],
+        entry: ["./src/plugin/index.tsx"],
       },
     },
   };

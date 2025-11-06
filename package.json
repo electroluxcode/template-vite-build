@@ -23,6 +23,7 @@
   "dependencies": {
     "ahooks": "^3.7.11",
     "antd": "^4.24.16",
+    "antdv5": "npm:antd@^5.0.0",
     "axios": "^1.7.4",
     "lodash-es": "^4.17.21",
     "path": "^0.12.7"
